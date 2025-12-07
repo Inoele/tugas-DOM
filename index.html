@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            background: linear-gradient(#ffe6f2, #ffb8d9);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="judul">Ini adalah judul</h1>
+    <h1 id="pembuka">Selamat datang di website pecinta pink!</h1>
+    <h2 id="warna">apa kamu suka warna merah muda?</h2>
+    <h3 id="Saya">Daftar pecinta warna Pink sekarang!</h3>
+
+    <h4 style="display: inline;" id="Klik">
+        Klik tombol di samping kalau itu kamu 👉
+    </h4>
+    <button onclick="ubah()">Klik</button>
+
+    <br><br>
+
+    <h4 style="display: inline;" id="textTarget">
+        Ayo ubah teks ini jadi warna kesukaanmu!
+    </h4>
+
+    <input type="color" id="colorPicker">
+
+    <script>
+        // warna pink awal
+        document.getElementById("Klik").style.color = "#ff69b4";
+
+        document.getElementById("judul").innerHTML = "Hai Girls!!";
+        document.getElementById("judul").style.color = "#ff69b4";
+
+        document.getElementById("pembuka").style.color = "#d98880";
+        document.getElementById("pembuka").style.backgroundColor = "#ffe6ec";
+
+        document.getElementById("warna").style.color = "#d98880";
+        document.getElementById("warna").style.backgroundColor = "#ffe6ec";
+
+        document.getElementById("Saya").style.color = "#ff69b4";
+
+        let pinkColors = ["#ff1493", "#ff80c8", "#c71585", "#ff8fa2", "#ff3eb5"];
+        let indexWarna = 0;
+        let sudahDaftar = false;
+
+        function ubah() {
+            let teks = document.getElementById("Saya");
+
+            if (!sudahDaftar) {
+                teks.innerText = "HORE!! KAMU TELAH TERDAFTAR";
+                indexWarna = (indexWarna + 1) % pinkColors.length;
+                teks.style.color = pinkColors[indexWarna];
+                sudahDaftar = true;
+            } else {
+                teks.innerText = "Daftar pecinta warna Pink sekarang!";
+                teks.style.color = "#ff69b4";
+                sudahDaftar = false;
+            }
+        }
+
+        // bagian yang memperbaiki input color
+        const picker = document.getElementById("colorPicker");
+        const text = document.getElementById("textTarget");
+
+        picker.addEventListener("input", function () {
+            text.style.color = this.value;
+        });
+    </script>
+</body>
+</html>
