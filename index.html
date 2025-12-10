@@ -1,79 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-        }
-        body {
-            background: linear-gradient(#ffe6f2, #ffb8d9);
-            text-align: center;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website Pink</title>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    body {
+      background: linear-gradient(#ffe6f2, #ffb8d9);
+      text-align: center;
+      font-family: sans-serif;
+      padding: 24px;
+    }
+    .controls {
+      display: inline-flex;
+      gap: 12px;
+      align-items: center;
+      margin-top: 16px;
+    }
+    button {
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: none;
+      background: #ff69b4;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    button:active { transform: translateY(1px); }
+    input[type="color"] { width: 44px; height:44px; border: none; padding:0; background:transparent; cursor:pointer; }
+  </style>
 </head>
 <body>
-    <h1 id="judul">Ini adalah judul</h1>
-    <h1 id="pembuka">Selamat datang di website pecinta pink!</h1>
-    <h2 id="warna">apa kamu suka warna merah muda?</h2>
-    <h3 id="Saya">Daftar pecinta warna Pink sekarang!</h3>
+  <h1 id="judul">Hai Girls!!</h1>
+  <h2 id="pembuka">Selamat datang di website pecinta pink!</h2>
+  <h3 id="warna">Apa kamu suka warna merah muda?</h3>
 
-    <h4 style="display: inline;" id="Klik">
-        Klik tombol di samping kalau itu kamu 👉
-    </h4>
-    <button onclick="ubah()">Klik</button>
+  <h4 id="klik" style="color:#ff69b4; display:inline;">Klik tombol di samping kalau itu kamu 👉</h4>
 
-    <br><br>
+  <div class="controls">
+    <button type="button" id="btnDaftar" onclick="ubah()">Klik</button>
 
-    <h4 style="display: inline;" id="textTarget">
-        Ayo ubah teks ini jadi warna kesukaanmu!
-    </h4>
+    <div style="display:flex; flex-direction:column; align-items:center;">
+      <h4 id="textTarget" style="margin:0;">Ayo ubah teks ini jadi warna kesukaanmu!</h4>
+      <label for="colorPicker" style="font-size:12px; opacity:0.9; margin-top:6px;">Pilih warna</label>
+      <input type="color" id="colorPicker">
+    </div>
+  </div>
 
-    <input type="color" id="colorPicker">
+  <h3 id="saya" style="color:#ff69b4; margin-top:24px;">Daftar pecinta warna Pink sekarang!</h3>
 
-    <script>
-        document.getElementById("Klik").style.color = "#ff69b4";
+  <script>
+    const pinkColors = ["#ff1493", "#ff80c8", "#c71585", "#ff8fa2", "#ff3eb5"];
+    let indexWarna = 0;
+    let sudahDaftar = false;
 
-        document.getElementById("judul").innerHTML = "Hai Girls!!";
-        document.getElementById("judul").style.color = "#ff69b4";
+    const teksSaya = document.getElementById("saya");
+    const picker = document.getElementById("colorPicker");
+    const textTarget = document.getElementById("textTarget");
+    const btn = document.getElementById("btnDaftar");
 
-        document.getElementById("pembuka").style.color = "#d98880";
-        document.getElementById("pembuka").style.backgroundColor = "#ffe6ec";
+    picker.value = "#ff69b4";
 
-        document.getElementById("warna").style.color = "#d98880";
-        document.getElementById("warna").style.backgroundColor = "#ffe6ec";
+    function ubah() {
+      if (!sudahDaftar) {
+        teksSaya.innerText = "HORE!! KAMU TELAH TERDAFTAR";
+        indexWarna = (indexWarna + 1) % pinkColors.length;
+        teksSaya.style.color = pinkColors[indexWarna];
+        sudahDaftar = true;
+        btn.innerText = "Batal";
+      } else {
+        teksSaya.innerText = "Daftar pecinta warna Pink sekarang!";
+        teksSaya.style.color = "#ff69b4";
+        sudahDaftar = false;
+        btn.innerText = "Klik";
+      }
+    }
 
-        document.getElementById("Saya").style.color = "#ff69b4";
-
-        let pinkColors = ["#ff1493", "#ff80c8", "#c71585", "#ff8fa2", "#ff3eb5"];
-        let indexWarna = 0;
-        let sudahDaftar = false;
-
-        function ubah() {
-            let teks = document.getElementById("Saya");
-
-            if (!sudahDaftar) {
-                teks.innerText = "HORE!! KAMU TELAH TERDAFTAR";
-                indexWarna = (indexWarna + 1) % pinkColors.length;
-                teks.style.color = pinkColors[indexWarna];
-                sudahDaftar = true;
-            } else {
-                teks.innerText = "Daftar pecinta warna Pink sekarang!";
-                teks.style.color = "#ff69b4";
-                sudahDaftar = false;
-            }
-        }
-
-         input color
-        const picker = document.getElementById("colorPicker");
-        const text = document.getElementById("textTarget");
-
-        picker.addEventListener("input", function () {
-            text.style.color = this.value;
-        });
-    </script>
+    picker.addEventListener("input", function () {
+      textTarget.style.color = this.value;
+    });
+  </script>
 </body>
 </html>
